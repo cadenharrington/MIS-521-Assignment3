@@ -51,11 +51,26 @@ namespace FL2024_Assignment3_charrington.Controllers
             var viewModel = new ActorDetailsViewModel
             {
                 Actor = actor,
-                AssociatedMovies = actor.MovieActors.Select(ma => ma.Movie).ToList(),
-                RedditPostsAndSentiment = AnalyzeSentiment(await SearchRedditAsync(actor.Name)).PostsAndSentiment,
-                OverallSentiment = AnalyzeSentiment(await SearchRedditAsync(actor.Name)).AverageScore,
-                SentimentCategory = AnalyzeSentiment(await SearchRedditAsync(actor.Name)).Category
+                AssociatedMovies = actor.MovieActors.Select(ma => ma.Movie).ToList()
             };
+
+            try
+            {
+                var redditData = await SearchRedditAsync(actor.Name);
+                var sentimentData = AnalyzeSentiment(redditData);
+                viewModel.RedditPostsAndSentiment = sentimentData.PostsAndSentiment;
+                viewModel.OverallSentiment = sentimentData.AverageScore;
+                viewModel.SentimentCategory = sentimentData.Category;
+            }
+            catch (Exception ex)
+            {
+                // Log the error and display a message to the user
+                viewModel.RedditPostsAndSentiment = new Dictionary<string, float>();
+                viewModel.OverallSentiment = 0;
+                viewModel.SentimentCategory = "Unable to retrieve sentiment data (Request blocked)";
+                // Optionally, log the exception
+                Console.WriteLine($"Error fetching Reddit data: {ex.Message}");
+            }
 
             return View(viewModel);
         }
