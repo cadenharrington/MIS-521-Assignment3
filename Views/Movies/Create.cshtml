@@ -1,0 +1,71 @@
+﻿@model FL2024_Assignment3_charrington.ViewModels.MovieCreateViewModel
+
+@{
+    ViewData["Title"] = "Create Movie";
+}
+
+<h1>Create Movie</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <!-- Validation summary to display general errors -->
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <!-- Title field -->
+            <div class="form-group">
+                <label asp-for="Movie.Title" class="control-label"></label>
+                <input asp-for="Movie.Title" class="form-control" />
+                <span asp-validation-for="Movie.Title" class="text-danger"></span>
+            </div>
+
+            <!-- IMDB Hyperlink field -->
+            <div class="form-group">
+                <label asp-for="Movie.IMDBHyperlink" class="control-label"></label>
+                <input asp-for="Movie.IMDBHyperlink" class="form-control" />
+                <span asp-validation-for="Movie.IMDBHyperlink" class="text-danger"></span>
+            </div>
+
+            <!-- Genre field -->
+            <div class="form-group">
+                <label asp-for="Movie.Genre" class="control-label"></label>
+                <input asp-for="Movie.Genre" class="form-control" />
+                <span asp-validation-for="Movie.Genre" class="text-danger"></span>
+            </div>
+
+            <!-- Year of Release field -->
+            <div class="form-group">
+                <label asp-for="Movie.YearOfRelease" class="control-label"></label>
+                <input asp-for="Movie.YearOfRelease" class="form-control" />
+                <span asp-validation-for="Movie.YearOfRelease" class="text-danger"></span>
+            </div>
+
+            <!-- Poster Upload field -->
+            <div class="form-group">
+                <label asp-for="PosterURL" class="control-label">Movie Poster</label>
+                <input asp-for="PosterURL" class="form-control" type="file" />
+                <span asp-validation-for="PosterURL" class="text-danger"></span>
+            </div>
+
+            <!-- Actor Selection field -->
+            @if (Model.AvailableActors != null && ((IEnumerable<SelectListItem>)Model.AvailableActors).Any())
+            {
+                <select asp-for="SelectedActors" class="form-control" asp-items="Model.AvailableActors" multiple="multiple" data-val="false"></select>
+            }
+            else
+            {
+                <p>No actors available to select</p>
+            }
+
+            <!-- Submit button -->
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @Html.Partial("_ValidationScriptsPartial")
+}

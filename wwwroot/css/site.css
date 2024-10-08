@@ -1,0 +1,64 @@
+html, body {
+    height: 100%; /* Ensure full height */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0; /* Remove default margin */
+    min-height: 100vh; /* Minimum height of viewport */
+    background-color: #1c1c1c; /* Dark background */
+    color: #f5f5f5; /* Light text */
+}
+
+.container {
+    flex-grow: 1; /* Makes sure the container grows to push the footer down */
+}
+
+h1, h2, h3, h4 {
+    color: #ffcc00; /* Yellow headings */
+}
+
+a {
+    color: #ffcc00; /* Yellow links */
+}
+
+    a:hover {
+        color: #ff9900;
+    }
+
+footer {
+    background-color: #333333;
+    color: #ffcc00; /* Yellow footer text */
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    position: relative; /* Ensure footer stays at the bottom */
+}
+
+.btn-primary {
+    background-color: #ffcc00;
+    border-color: #ffcc00;
+    color: #000000;
+}
+
+.btn-warning, .btn-info, .btn-danger {
+    margin-right: 5px;
+}
+
+table {
+    width: 100%;
+    margin: 20px 0;
+    color: #f5f5f5;
+    background-color: #333333;
+}
+
+.table th {
+    background-color: #ffcc00;
+    color: #1c1c1c;
+}
+
+.table td {
+    background-color: #444444;
+    color: #f5f5f5;
+}

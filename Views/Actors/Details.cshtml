@@ -1,0 +1,48 @@
+﻿@model FL2024_Assignment3_charrington.ViewModels.ActorDetailsViewModel
+
+<h1>Actor: @Model.Actor.Name</h1>
+<p>IMDB Link: <a href="@Model.Actor.IMDBHyperlink" target="_blank">View on IMDB</a></p>
+<p>Gender: @Model.Actor.Gender</p>
+<p>Age: @Model.Actor.Age</p>
+
+<h2>Associated Movies</h2>
+@if (Model.AssociatedMovies != null && Model.AssociatedMovies.Any())
+{
+    <ul>
+        @foreach (var movie in Model.AssociatedMovies)
+        {
+            <li>@movie.Title</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No movies associated with this actor.</p>
+}
+
+<h2>Reddit Sentiment Analysis</h2>
+<p>Overall Sentiment: @Model.OverallSentiment (@Model.SentimentCategory)</p>
+
+<table id="redditSentimentTable" class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Reddit Post</th>
+            <th>Sentiment</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var post in Model.RedditPostsAndSentiment)
+        {
+            <tr>
+                <td>@post.Key</td>
+                <td>@post.Value</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        $('#redditSentimentTable').DataTable();
+    });
+</script>

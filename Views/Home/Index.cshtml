@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center" style="color: #ffcc00; padding: 50px;">
+    <h1>Movies and Actors</h1>
+    <p style="font-size: 18px;">
+        Welcome to the Movies and Actors Management platform! This site allows you to create, edit, and manage your favorite movies and actors.
+        You can also manage the relationships between them, making it easy to see which actors star in which movies.
+        Feel free to explore the catalog, manage existing entries, or add new ones!
+    </p>
+    <div class="mt-4">
+        <a href="@Url.Action("Index", "Movies")" class="btn btn-primary">Manage Movies</a>
+        <a href="@Url.Action("Index", "Actors")" class="btn btn-primary">Manage Actors</a>
+    </div>
+</div>

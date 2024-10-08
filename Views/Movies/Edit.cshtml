@@ -1,0 +1,71 @@
+﻿@model FL2024_Assignment3_charrington.ViewModels.MovieEditViewModel
+
+@{
+    ViewData["Title"] = "Edit Movie";
+}
+
+<h1>Edit Movie</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Movie.Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Title -->
+            <div class="form-group">
+                <label asp-for="Movie.Title" class="control-label"></label>
+                <input asp-for="Movie.Title" class="form-control" />
+                <span asp-validation-for="Movie.Title" class="text-danger"></span>
+            </div>
+
+            <!-- IMDB Link -->
+            <div class="form-group">
+                <label asp-for="Movie.IMDBHyperlink" class="control-label"></label>
+                <input asp-for="Movie.IMDBHyperlink" class="form-control" />
+                <span asp-validation-for="Movie.IMDBHyperlink" class="text-danger"></span>
+            </div>
+
+            <!-- Genre -->
+            <div class="form-group">
+                <label asp-for="Movie.Genre" class="control-label"></label>
+                <input asp-for="Movie.Genre" class="form-control" />
+                <span asp-validation-for="Movie.Genre" class="text-danger"></span>
+            </div>
+
+            <!-- Year of Release -->
+            <div class="form-group">
+                <label asp-for="Movie.YearOfRelease" class="control-label"></label>
+                <input asp-for="Movie.YearOfRelease" class="form-control" />
+                <span asp-validation-for="Movie.YearOfRelease" class="text-danger"></span>
+            </div>
+
+            <!-- Poster Upload -->
+            <div class="form-group">
+                <label asp-for="PosterURL" class="control-label">Upload New Poster</label>
+                <input asp-for="PosterURL" class="form-control" type="file" />
+                <span asp-validation-for="PosterURL" class="text-danger"></span>
+            </div>
+
+            <!-- Actor Selection -->
+            @if (Model.AvailableActors != null && ((IEnumerable<SelectListItem>)Model.AvailableActors).Any())
+            {
+                <select asp-for="SelectedActors" class="form-control" asp-items="Model.AvailableActors" multiple="multiple" data-val="false"></select>
+            }
+            else
+            {
+                <p>No actors available to select</p>
+            }
+
+            <!-- Save Button -->
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @Html.Partial("_ValidationScriptsPartial")
+}

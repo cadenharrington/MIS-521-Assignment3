@@ -1,0 +1,71 @@
+﻿@model FL2024_Assignment3_charrington.ViewModels.ActorEditViewModel
+
+@{
+    ViewData["Title"] = "Edit Actor";
+}
+
+<h1>Edit Actor</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Actor.Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Name -->
+            <div class="form-group">
+                <label asp-for="Actor.Name" class="control-label"></label>
+                <input asp-for="Actor.Name" class="form-control" />
+                <span asp-validation-for="Actor.Name" class="text-danger"></span>
+            </div>
+
+            <!-- Gender -->
+            <div class="form-group">
+                <label asp-for="Actor.Gender" class="control-label"></label>
+                <input asp-for="Actor.Gender" class="form-control" />
+                <span asp-validation-for="Actor.Gender" class="text-danger"></span>
+            </div>
+
+            <!-- Age -->
+            <div class="form-group">
+                <label asp-for="Actor.Age" class="control-label"></label>
+                <input asp-for="Actor.Age" class="form-control" />
+                <span asp-validation-for="Actor.Age" class="text-danger"></span>
+            </div>
+
+            <!-- IMDB Hyperlink -->
+            <div class="form-group">
+                <label asp-for="Actor.IMDBHyperlink" class="control-label"></label>
+                <input asp-for="Actor.IMDBHyperlink" class="form-control" />
+                <span asp-validation-for="Actor.IMDBHyperlink" class="text-danger"></span>
+            </div>
+
+            <!-- Photo Upload -->
+            <div class="form-group">
+                <label asp-for="Photo" class="control-label">Upload New Photo</label>
+                <input asp-for="Photo" class="form-control" type="file" />
+                <span asp-validation-for="Photo" class="text-danger"></span>
+            </div>
+
+            <!-- Movie Selection -->
+            @if (ViewBag.Movies != null && ((IEnumerable<SelectListItem>)ViewBag.Movies).Any())
+            {
+                <select asp-for="SelectedMovies" class="form-control" asp-items="ViewBag.Movies" multiple="multiple" data-val="false"></select>
+            }
+            else
+            {
+                <p>No movies available to select</p>
+            }
+
+            <!-- Save Button -->
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @Html.Partial("_ValidationScriptsPartial")
+}
